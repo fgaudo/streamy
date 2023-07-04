@@ -1,0 +1,70 @@
+{
+  "name": "streamy",
+  "version": "0.0.1",
+  "description": "An alternative interface to rxjs and fp-ts-rxjs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fgaudo/streamy.git"
+  },
+  "author": "Francesco Gaudenzi <fgaudo@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fgaudo/streamy/issues"
+  },
+  "homepage": "https://github.com/fgaudo/streamy#readme",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/esm/types/index.d.ts",
+        "default": "./dist/esm/index.mjs"
+      },
+      "require": {
+        "types": "./dist/cjs/types/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      }
+    }
+  },
+  "main": "./dist/cjs/index.js",
+  "files": [
+    "dist/**/*"
+  ],
+  "scripts": {
+    "build": "npm run clean && npm run build:esm && npm run build:cjs",
+    "build:cjs": "tsc -p ./tsconfig.cjs.json",
+    "build:esm": "tsc -p ./tsconfig.esm.json && move dist/esm/index.js dist/esm/index.mjs",
+    "clean": "del ./dist"
+  },
+  "types": "./dist/cjs/types/index.d.ts",
+  "peerDependencies": {
+    "fp-ts": "^2.16.0",
+    "rxjs": "^7.8.1"
+  },
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.1.1",
+    "@types/chai": "^4.3.5",
+    "@types/mocha": "^10.0.1",
+    "@typescript-eslint/eslint-plugin": "^5.60.1",
+    "@typescript-eslint/parser": "^5.60.1",
+    "chai": "^4.3.7",
+    "del-cli": "^5.0.0",
+    "eslint": "^8.43.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-functional": "^5.0.8",
+    "eslint-plugin-tsdoc": "^0.2.17",
+    "mocha": "^10.2.0",
+    "move-cli": "^2.0.0",
+    "prettier": "^2.8.8",
+    "simplytyped": "^3.3.0",
+    "ts-mocha": "^10.0.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6"
+  },
+  "keywords": [
+    "fp-ts",
+    "rxjs"
+  ],
+  "tags": [
+    "rxjs",
+    "fp-ts"
+  ]
+}

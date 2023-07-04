@@ -1,0 +1,5 @@
+export { first } from './First'
+export { fromObservable } from './FromObservable'
+export { map } from './Map'
+export { mergeMapW, mergeMap } from './MergeMap'
+export { switchMapW, switchMap } from './SwitchMap'
