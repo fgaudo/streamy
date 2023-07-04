@@ -5,14 +5,22 @@ type SwitchMapWOp = <C1, A, B>(
 ) => <C2>(s: Producer<C2, A>) => Producer<C1 | C2, B>
 
 export const switchMapW: SwitchMapWOp = f => source => (complete, next) => {
-	let unsubscribe: () => void = () => {}
+	const unsubs: [() => void, () => void] = [() => {}, () => {}]
 
-	unsubscribe = source(complete, a => {
-		unsubscribe()
-		unsubscribe = f(a)(complete, next)
-	})
+	const unsubAll = () => unsubs.forEach(unsub => unsub())
 
-	return unsubscribe
+	unsubs[0] = source(
+		c => {
+			unsubAll()
+			complete(c)
+		},
+		a => {
+			unsubs[1]()
+			unsubs[1] = f(a)(complete, next)
+		}
+	)
+
+	return unsubAll
 }
 
 type SwitchMapOp = <C, A, B>(
